@@ -1,0 +1,10 @@
+*{margin:0; padding:0;}
+
+
+.scrollWarp{width:800px; margin:0 auto; border:1px solid #ccc;  position: relative;}
+.scrollWarp .scroll{height: 500px; overflow: hidden;}
+.scrollBg{background:#ccc;position:absolute; right:0; top:0; width:10px; height: 100%;}
+.scrollBg .scrollBlock{background:#fff; position: absolute; left:0; top:0; width:100%;}
+.scrollBg .but{position: absolute; width:100%; border:1px solid #000; height: 10px; left:0;}
+.scrollBg .butT{top:0;}
+.scrollBg .butB{bottom:0;}
