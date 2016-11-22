@@ -17,10 +17,11 @@ $.fn.extend({
 			scrollMainHeight 	= 0,
 			isFirefox 			= navigator.userAgent.toLocaleLowerCase().indexOf('firefox') != -1,
 			settings 			= {
-				'spend'		: 50,
-				'time'		: 200,	
-				'showBut' 	: true,
-				'butStyle'	: {
+				'spend'			: 50,      // 滚动速度
+				'time'			: 200,	   // 长按按钮滚动时间
+				'showBut' 		: true,    // 是否显示按钮
+				'showScroll'	: false,   // 是否显示滚动条
+				'butStyle'		: {        // 按钮样式
 					'width'		: '100%',
 					'height'	: '10px',
 				},
@@ -35,7 +36,7 @@ $.fn.extend({
 			scrollMain 			= $('.scrollMain', warp),
 			scrollMainHeight	= scrollMain.height();
 
-			if( scrollMainHeight < self.height() ){ return false;}
+			if( scrollMainHeight < self.height() && ! settings.showScroll ){ return false;}
 
 			var html 	= '<div class="scrollBg"><div class="scrollBlock"></div></div>';
 			warp.append( html );
@@ -58,7 +59,7 @@ $.fn.extend({
 			// 计算滑块高度
 			scrollBgHeight 		= scrollBg.height() - butHeight * 2;
 			scrollBlockHeight 	= warp.height() * scrollBgHeight / scrollMainHeight;
-			scrollBlock.height( scrollBlockHeight ).css('margin-top', butHeight+'px');
+			scrollBlock.height( scrollBlockHeight > scrollMainHeight ? 0 : scrollBlockHeight ).css('margin-top', butHeight+'px');
 			
 			return true
 		}
@@ -149,13 +150,13 @@ $.fn.extend({
 			})
 
 			// 按钮绑定事件
-			var i = '', start = true, _but = '', flag = '';
+			var i = '', start = true;
 			if(settings.showBut){
 				but.on('click', function(){
-					_but 	= $(this),
-					flag 	= _but.hasClass('butB') ;
+					var flag = $(this).hasClass('butB');
 					scroll( flag );
 				}).on('mousedown', function(){
+					var flag = $(this).hasClass('butB');
 					if( start ){
 						i = setInterval(function(){
 							scroll( flag );
