@@ -27,7 +27,7 @@ $.fn.extend({
 				},
 			};
 
-		settings 	= $.extend(settings, options);
+		settings 	= $.extend(settings, options || {});
 		// 创建滚动条
 		function createScroll(){
 			self.wrapAll('<div class="scrollWarp"></div>');
