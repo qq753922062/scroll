@@ -223,23 +223,25 @@ $.fn.extend({
 				});
 			}
 
-			$(document).on('mousemove', function(e){
-				if( moveY ){
-					var Y 		= e.pageY - startY + positionY,
-						postY 	= checkPost( Y, 'Y' ) * scrollMainHeight / scrollBgHeight;
-					scroll( postY, 'Y' );
-				}
-				if( moveX ){
-					var X 		= e.pageX - startX + positionX,
-						postX 	= checkPost( X, 'X' ) * scrollMainWidth / scrollBgWidth;
-					scroll( postX, 'X' );
-				}
-				// return false;
-			}).on('mouseup', function(){
-				moveX = false;
-				moveY = false;
-				return false;
-			})
+			if( scrollY || scrollX ){
+				$(document).on('mousemove', function(e){
+					if( moveY ){
+						var Y 		= e.pageY - startY + positionY,
+							postY 	= checkPost( Y, 'Y' ) * scrollMainHeight / scrollBgHeight;
+						scroll( postY, 'Y' );
+					}
+					if( moveX ){
+						var X 		= e.pageX - startX + positionX,
+							postX 	= checkPost( X, 'X' ) * scrollMainWidth / scrollBgWidth;
+						scroll( postX, 'X' );
+					}
+					// return false;
+				}).on('mouseup', function(){
+					moveX = false;
+					moveY = false;
+					return false;
+				});
+			}
 
 			// 按钮绑定事件
 			var i = '', start = true;
